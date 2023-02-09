@@ -24,11 +24,7 @@ class ComposeQuadrant : ComponentActivity() {
         setContent {
             HappyBirthdayTheme {
                 // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colors.background
-                ) {
-
+                Surface(color = MaterialTheme.colors.background) {
                 }
             }
         }
@@ -36,11 +32,25 @@ class ComposeQuadrant : ComponentActivity() {
 }
 
 @Composable
-fun Drawing(name: String, description: String, color: Color) {
+fun ComposeQuadrantApp() {
+    Column(Modifier.fillMaxWidth()) {
+        Row(Modifier.weight(1f)) {
+            Drawing(name = "1", description = "hello, 1", color = Color.Green, Modifier.weight(1f))
+            Drawing(name = "2", description = "hello, 2", color = Color.Red, Modifier.weight(1f))
+        }
+        Row(Modifier.weight(1f)) {
+            Drawing(name = "3", description = "hello, 3", color = Color.Red, Modifier.weight(1f))
+            Drawing(name = "4", description = "hello, 4", color = Color.Green, Modifier.weight(1f))
+        }
+    }
+}
+
+@Composable
+fun Drawing(name: String, description: String, color: Color, modifier: Modifier = Modifier) {
     Column(
-        modifier = Modifier
-            .background(color)
+        modifier = modifier
             .fillMaxSize()
+            .background(color)
             .padding(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
@@ -61,6 +71,6 @@ fun Drawing(name: String, description: String, color: Color) {
 @Composable
 fun DefaultPreview() {
     HappyBirthdayTheme {
-        Drawing(name = "text composable", description = "hello", Color.Green)
+        ComposeQuadrantApp()
     }
 }
